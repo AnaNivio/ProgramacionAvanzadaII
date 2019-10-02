@@ -1,0 +1,113 @@
+<!--1. Insertar el string "Hello World" dentro del elemento <p>-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Tp2</title>
+	</head>
+	<body>
+		<p id="myId"></p>
+		<button onclick="insertar()">hOLA</button>
+	</body>
+	<script>
+		function insertar(){
+			document.getElementById("myId").innertHTML = "Hello World";
+		}
+	</script>
+</html>
+
+
+<!--2. Insertar el string "Hello World" dentro del primer elemento que tenga la clase test-->
+
+index
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Tp2</title>
+</head>
+<body>
+<p class="test"></p>
+<p class="test"></p>
+<button onclick="nombreFuncion()">boton magico</button>
+</body>
+</html>
+
+javascript
+
+function nombreFuncion(){
+  document.getElementsByClassName("test")[0].innerHTML = "Hello World";
+}
+
+
+<!-- 3. Agregar funcionalidad a los botones para modificar la tabla.
+a. Cuando haga click en el botón “Insert row” se deberá agregar una fila al final de
+la tabla.
+b. Cuando haga click en el botón “Delete row” se deberá borrar la última fila
+agregada. -->
+
+index
+
+<!DOCTYPE html>
+<html lang= "en">
+	<head>
+		<title >Tp2</ title >
+		<style >
+		table , th , td {
+		border : 1px solid black;
+		}
+		</style>
+	</head>
+	<body>
+		<input type= "button" onclick= "insertRow()" value= "Insert row" >
+		<input type= "button" onclick= "deleteRow()" value= "Delete row" >
+
+		<br><br>
+		<table style= "width:100%" class= "myTable" >
+		<thead>
+			<th>Header 1</th>
+			<th>Header 2</th>			
+		</thead>
+
+		<tbody>
+			
+		</tbody>
+		</table>
+	</body>
+</html>
+
+
+javascript
+<script type="">
+	var count = 0;	
+
+	function insertRow(){
+		var table = document.getElementsByClassName("myTable")[0];
+		var row = table.insertRow();
+
+		var cell1 = row.insertCell();
+		var call2 = row.insertCell();
+
+		cell1.innerHTML = "columna" + count;
+		cell2.innerHTML = "columna" + (count + 1);
+
+		count++;
+	}
+
+	function deleteRow(){
+		var table = document.getElementsByClassName("myTable")[0];
+
+		table.deleteRow(-1);
+	}
+</script>
+
+
+
+<!--4. Deberá resaltar (agregar CSS) todos los elementos span que contengan la clase
+myClass cuando se haga click en el botón “Highlight words” . -->
+<!-- -->
+
+<!-- -->
+
+
+<!-- -->
+<!-- -->
+<!-- -->

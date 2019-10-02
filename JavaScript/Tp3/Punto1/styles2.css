@@ -1,0 +1,94 @@
+/*Modificado para cumplir con el ejercicio*/
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: #e6e6e6;
+}
+
+header img{
+    float: left;
+}
+header h1{
+    float: left;
+}
+
+header, nav, .main, footer{
+    width: 90%;
+    max-width: 100em;
+    margin:2em auto;
+}
+
+header{
+    overflow: hidden;
+    background: white;
+}
+nav{
+    background: aquamarine;
+    overflow: hidden;
+    /*con overflow hidden, nos sirve para ocultar el contenido que sobrepasa
+    nuestro contenedor y para limpiar nuestras propiedades float*/
+}
+
+nav ul{
+    list-style: none;
+}
+
+nav ul li{
+    float:left;
+}
+
+nav ul li a{
+    padding: 1em 2em;
+    display:block;
+    color:purple;
+    text-decoration:none;
+}
+
+/*si paso el mouse por ahi, cambio de color*/
+nav ul li a:hover{
+    background: yellow;
+} 
+
+.main{
+    overflow: hidden;
+}
+
+.main .articles{
+    width:68.5%;
+    margin-left: 1.5%;
+    float:right; 
+}
+
+.main .articles article{
+    height: 6.5em;
+    padding: 1.5em;
+    background: white;
+    padding-bottom: 100%;
+    margin-bottom: -100%;
+
+}
+
+aside{
+    height: 6.5em;
+    width:30%;
+    background: orange;
+    float: right;
+    padding: 1.5em;
+    box-sizing:border-box;
+    padding-bottom: 100%;
+    margin-bottom: -100%;
+}
+
+footer{
+    background: black;
+    color:white;
+    clear: both;
+    /*limpiamos los float left/right*/
+    padding: 1em 0em;
+    text-align: center;
+}
+ 

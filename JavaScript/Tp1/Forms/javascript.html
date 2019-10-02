@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TP Poco original :v</title>
+
+</head>
+<body>
+	<p>Punto 1 Forms</p>
+	<form onsubmit="validar()">
+		<div id="div1">
+			<div>
+				<label for="nombre">Ingrese nombre</label>
+				<input type="text" id="nombre">
+			</div>
+			<div>
+				<label for="apellido">Ingrese apellido</label>
+				<input type="text" id="apellido">
+			</div>
+			<div>
+				<label for="edad">Ingrese edad</label>
+				<input type="text" id="edad">
+			</div>
+			<div>
+				<label for="contrasenia">Ingrese contrasenia</label>
+				<input type="text" id="contrasenia">
+			</div>
+			<div>
+				<label for="email">Ingrese email</label>
+				<input type="text" id="email">
+			</div>
+
+			<button type="submit">Enviar</button>
+
+			<p id="error"></p>
+
+		</div>
+
+	</form>
+	<script>
+		var nombre,apellido,edad,contrasenia,email,error;
+
+		nombre= document.getElementById("nombre");
+		apellido= document.getElementById("apellido");
+		edad = document.getElementById("edad");
+		contrasenia=document.getElementById("contrasenia");
+		email=document.getElementById("email");
+		error=document.getElementById("error");
+
+		function validar(){
+			//expresiones regulares. Devuelven lo que se les especifica, sino nada.
+
+			var soloAlfanumerico = /^[a-zA-Z0-9 ]*$/;
+			var soloMinusculas = /^[A-Z0-9]*$/;
+			var soloMayusculas = /^[a-z0-9]*$/;
+			var soloMayusculasYminusculas = /^[a-zA-Z]*$/;
+			var validacionEmail= /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm;
+			var contraseniaNull=0;
+			var mailNull=0;
+
+			/*Con el / al lado del ^, estoy negando. Entonces, por ejemplo, 
+			soloAlfaNumerico no me devolvera nada si solo hay alfas numericos
+			en cambio, devolvera algo en caso de hallarse otra cosa que no lo 
+			sea.*/
+
+			errores = [];
+			//nombre
+			if(nombre.value == ""){
+				errores.push('El nombre no puede estar vacio');
+			}
+
+			if(nombre.value.length > 20){
+				errores.push('El nombre excede los 20 caracteres');
+			}
+
+			if(!nombre.value.match(soloAlfanumerico)){
+				errores.push('El nombre no puede contener caracteres especiales');
+			}
+
+			//apellido
+
+			if(apellido.value == ""){
+				errores.push('El apellido no puede estar vacio');
+			}
+
+			if(apellido.value.length > 20){
+				errores.push('El apellido excede los 20 caracteres');
+			}
+
+			if(!apellido.value.match(soloAlfanumerico)){
+				errores.push('El apellido no puede contener caracteres especiales');
+			}
+
+			//edad
+
+			if(edad.value.length > 0){
+				if(!edad.value.match(soloNumeros)){
+					errores.push('La edad solo puede ser expresada por numeros');
+				}
+			}
+
+			//contrasenia
+
+			if(contrasenia.value == ""){
+				errores.push('La contrasenia no puede estar vacia');
+				contraseniaNull=1;
+			}
+
+			//tuve que agregar esta variable porque sino, a pesar de que la contrasenia fuera nula, los otros errores saltaban
+			if(contraseniaNull != 1){
+
+				if(contrasenia.value.length < 9 || contrasenia.value.length > 20 ){
+					errores.push('La contrasenia debe tener entre 9 y 20 caracteres');
+				}
+
+				if(contrasenia.value.match(soloMinusculas) || contrasenia.value.match(soloMayusculas)){
+					errores.push('La contrasenia debe contener al menos una letra mayúscula y una minúscula.');
+				}
+
+				if(contrasenia.value.match(soloMayusculasYminusculas)){
+					errores.push('La contrasenia debe tener al menos un número.');
+				}
+			}
+
+			//email
+			if(email.value == ""){
+				errores.push('El email no puede estar vacio');
+				mailNull=1;
+			}
+
+			if(mailNull =! 1){			
+				if(email.value.match(validacionEmail)){
+					errores.push('Revise la direccion de mail');
+				}
+			}
+
+			//comprobacion final
+
+			if(errores.length > 0){
+				var mensaje = '';
+				for(i=0; i<errores.length; i++){
+					mensaje += errores[i]+"<br>";
+				}
+				error.innerHTML = mensaje;
+				event.preventDefault();
+				return false;
+			}
+
+
+		}
+
+	</script>
+
+</body>
+</html>

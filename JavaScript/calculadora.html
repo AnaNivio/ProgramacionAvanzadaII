@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculadora</title>
+
+</head>
+<body>
+	<p>Bienvenido a la calculadora virtual</p>
+	<form>
+		<div id="div1">
+			<input type="number" name="valor1" id="uno">Ingrese primer valor
+			<input type="number" name="valor2" id="dos">Ingrese segundo valor
+			<button type="button" name="sumar" onclick="sumarValores()">Sumar</button>
+			<button type="button" name="restar" onclick="restarValores()">Restar</button>
+			<button type="button" name="multiplicar" onclick="multiplicarValores()">Multiplicar</button>
+			<button type="button" name="dividir" onclick="dividirValores()">Dividir</button>
+
+			<p id="resultado">Resultado: </p>
+		</div>
+
+	</form>
+	<script>
+		
+		var valor1,valor2,resultado;
+
+		valor1 = document.getElementById("uno");
+		valor2 = document.getElementById("dos");
+		resultado=document.getElementById("resultado");
+
+		function sumarValores(){
+			var v1 = Number.parseInt(valor1.value);
+			var v2 = Number.parseInt(valor2.value);
+			resultado.innerHTML= (v1 + v2); 
+		}
+
+		function restarValores(){
+			var v1 = Number.parseInt(valor1.value);
+			var v2 = Number.parseInt(valor2.value);
+			resultado.innerHTML= (v1 - v2); 
+		}
+
+		function dividirValores(){
+			var v1 = Number.parseInt(valor1.value);
+			var v2 = Number.parseInt(valor2.value);
+			if(v2 == 0){
+				resultado.innerHTML= "No podes dividir por cero, gil";
+			}else{
+				resultado.innerHTML= (v1 / v2); 
+			}
+		}
+
+		function multiplicarValores(){
+			var v1 = Number.parseInt(valor1.value);
+			var v2 = Number.parseInt(valor2.value);
+			resultado.innerHTML= (v1 * v2); 
+		}
+
+	</script>
+
+</body>
+</html>
