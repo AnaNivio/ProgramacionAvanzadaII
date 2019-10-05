@@ -6,21 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-add.component.css']
 })
 export class StudentAddComponent implements OnInit {
-  
-  lastName: string;
-  firstName: string;
-  dni: string;
-  email: string;
-  address: string;
 
   constructor() { }
 
   ngOnInit() {
   }
-
-  addStudent(){
-    
-  }
-  
 
 }
