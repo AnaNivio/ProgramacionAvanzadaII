@@ -1,4 +1,4 @@
-<h1>This is the Student List Component</h1>
+<h1>This is the Student View Component</h1>
 
 <table class="table">
         <thead>
@@ -6,8 +6,9 @@
             <th scope="col">#</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
+            <th scope="col">Dni</th>
             <th scope="col">Email</th>
-            <th scope="col"></th>
+            <th scope="col">Address</th>
           </tr>
         </thead>
         <tbody>
@@ -17,16 +18,14 @@
             <td>Otto</td>
             <td>@mdo</td>
           </tr> -->
-          <tr *ngFor="let student of studentsList">
+          <tr>
             <td>{{ student.studentId }}</td>
             <td>{{ student.firstName }}</td>
             <td>{{ student.lastName }}</td>
+            <td>{{ student.dni }}</td>
             <td>{{ student.email }}</td>
-            <td>
-              <button type="button" class="btn btn-success">
-                <a class="nav-link" [routerLink]="['/view/',student.studentId]">List Students</a>
-              </button>
-          </td>
+            <td>{{ student.address }}</td>
+            
           </tr>
         </tbody>
 </table>
