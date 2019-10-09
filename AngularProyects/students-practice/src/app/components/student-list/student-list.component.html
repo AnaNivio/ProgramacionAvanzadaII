@@ -8,6 +8,7 @@
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
             <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -24,9 +25,14 @@
             <td>{{ student.email }}</td>
             <td>
               <button type="button" class="btn btn-success">
-                <a class="nav-link" [routerLink]="['/view/',student.studentId]">List Students</a>
+                <a class="nav-link" [routerLink]="['/view/',student.studentId]">Student Details</a>
               </button>
-          </td>
+            </td>
+            <td>
+              <button type="button" class="btn btn-warning">
+                <a class="nav-link" [routerLink]="['/modification/',student.studentId]">Modify Student</a>
+              </button>
+            </td>
           </tr>
         </tbody>
 </table>
