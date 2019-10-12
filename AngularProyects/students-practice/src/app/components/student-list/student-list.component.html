@@ -9,6 +9,7 @@
             <th scope="col">Email</th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -31,6 +32,11 @@
             <td>
               <button type="button" class="btn btn-warning">
                 <a class="nav-link" [routerLink]="['/modification/',student.studentId]">Modify Student</a>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger">
+                <a class="nav-link" (click)="deleteStudent(student.studentId)" >Delete Student</a>
               </button>
             </td>
           </tr>

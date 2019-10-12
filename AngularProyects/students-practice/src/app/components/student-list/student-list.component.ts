@@ -29,4 +29,14 @@ export class StudentListComponent implements OnInit {
     });
   }
 
+  deleteStudent(id: number) {
+    this.studentsService
+    .deleteStudent(id)
+    .then((result) => {
+      console.log('Success!: ' + result);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Student } from 'src/app/models/student';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -13,25 +13,41 @@ export class StudentAsyncService {
 
   // ready for test
     addStudent(student: Student): Promise <any> {
-        return this.http.post(this.apiUrl, student).toPromise();
+        const httpOptions = {
+          headers : new HttpHeaders({
+            'Content-Type': 'application/json'
+          })
+        };
+        return this.http.post(this.apiUrl, student, httpOptions).toPromise();
     }
 
-    modifyStudent(student: Student, id: number): Promise <any> {
-      return this.http.patch(this.apiUrl + id, student).toPromise();
-  }
-
     // ready for test
+    modifyStudent(student: Student, id: number): Promise <any> {
+      console.log(student);
+      const httpOptions = {
+        headers : new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+
+      return this.http.patch(this.apiUrl + id, student, httpOptions).toPromise();
+    }
+
     getStudents(): Promise <any> {
       return this.http.get(this.apiUrl).toPromise();
    }
 
-   // ready for test
+
    getStudentById(id: number): Promise <any> {
 
     return this.http.get(this.apiUrl + id).toPromise();
-  }
 
-  // modification nedded
+   }
+
+    deleteStudent(id: number): Promise <any> {
+      return this.http.delete(this.apiUrl + id).toPromise();
+
+   }
 
 
 }
