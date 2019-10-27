@@ -1,50 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Student } from 'src/app/models/student';
+import { Career } from 'src/app/models/career';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class StudentAsyncService {
-  private apiUrl = 'http://utn2019-avanzada2-tp8.herokuapp.com/api/students/';
+export class CareerAsyncService {
+  private apiUrl = 'http://utn2019-avanzada2-tp8.herokuapp.com/api/careers/';
 
   constructor(private http: HttpClient) { }
 
   // ready for test
-    addStudent(Student: Student): Promise <any> {
+    addCareer(Career: Career): Promise <any> {
         const httpOptions = {
           headers : new HttpHeaders({
             'Content-Type': 'application/json'
           })
         };
-        return this.http.post(this.apiUrl, Student, httpOptions).toPromise();
+        return this.http.post(this.apiUrl, Career, httpOptions).toPromise();
     }
 
     // ready for test
-    modifyStudent(Student: Student, id: number): Promise <any> {
-      console.log(Student);
+    modifyCareer(Career: Career, id: number): Promise <any> {
+      console.log(Career);
       const httpOptions = {
         headers : new HttpHeaders({
           'Content-Type': 'application/json'
         })
       };
 
-      return this.http.patch(this.apiUrl + id, Student, httpOptions).toPromise();
+      return this.http.patch(this.apiUrl + id, Career, httpOptions).toPromise();
     }
 
-    getStudents(): Promise <any> {
+    getCareers(): Promise <any> {
       return this.http.get(this.apiUrl).toPromise();
    }
 
 
-   getStudentById(id: number): Promise <any> {
+   getCareerById(id: number): Promise <any> {
 
     return this.http.get(this.apiUrl + id).toPromise();
 
    }
 
-    deleteStudent(id: number): Promise <any> {
+    deleteCareer(id: number): Promise <any> {
       return this.http.delete(this.apiUrl + id).toPromise();
 
    }

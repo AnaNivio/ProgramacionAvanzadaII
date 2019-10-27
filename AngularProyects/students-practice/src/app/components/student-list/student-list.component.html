@@ -7,6 +7,7 @@
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
+            <th scope="col">Career</th>
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -24,10 +25,11 @@
             <td>{{ student.firstName }}</td>
             <td>{{ student.lastName }}</td>
             <td>{{ student.email }}</td>
+            <td>{{ student.career.name }}</td>
             <td>
               <button type="button" class="btn btn-success">
                 <a class="nav-link" [routerLink]="['/view/',student.studentId]">Student Details</a>
-              </button>
+              </button>              
             </td>
             <td>
               <button type="button" class="btn btn-warning">

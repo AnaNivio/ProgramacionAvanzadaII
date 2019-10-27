@@ -1,3 +1,5 @@
+import { Career } from './career';
+
 export class Student {
     studentId: number;
     lastName: string;
@@ -5,4 +7,5 @@ export class Student {
     dni: string;
     email: string;
     address: string;
+    career: Career;
 }
