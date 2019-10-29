@@ -12,7 +12,7 @@ export class CareerAsyncService {
   constructor(private http: HttpClient) { }
 
   // ready for test
-    addCareer(career: Career): Promise <any> {
+    addCareer(career: any): Promise <any> {
         const httpOptions = {
           headers : new HttpHeaders({
             'Content-Type': 'application/json'
@@ -22,7 +22,7 @@ export class CareerAsyncService {
     }
 
     // ready for test
-    modifyCareer(career: Career, id: number): Promise <any> {
+    modifyCareer(career: any, id: number): Promise <any> {
       const httpOptions = {
         headers : new HttpHeaders({
           'Content-Type': 'application/json'

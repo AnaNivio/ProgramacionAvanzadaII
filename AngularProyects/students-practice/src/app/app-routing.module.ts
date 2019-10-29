@@ -6,12 +6,10 @@ import { StudentAddComponent } from './components/student-add/student-add.compon
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { StudentViewComponent } from './components/student-view/student-view.component';
 import { StudentModifyComponent } from './components/student-modify/student-modify.component';
-import { CareerAddComponent } from './components/career-add/career-add.component';
 import { CareerListComponent } from './components/career-list/career-list.component';
 
 const routes: Routes = [
   { path: 'add', component: StudentAddComponent},
-  { path: 'addCareer', component: CareerAddComponent},
   { path: 'list', component: StudentListComponent},
   { path: 'listCareer', component: CareerListComponent},
   { path: 'view/:id', component: StudentViewComponent},

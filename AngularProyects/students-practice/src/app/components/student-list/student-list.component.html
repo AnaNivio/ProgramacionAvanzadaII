@@ -25,17 +25,12 @@
             <td>{{ student.firstName }}</td>
             <td>{{ student.lastName }}</td>
             <td>{{ student.email }}</td>
-<<<<<<< HEAD
             <td>{{ student.career.name }}</td>
-=======
-            <td *ngIf="student.careerId != null">{{ studentCareer.name }}</td>             
-       
 
->>>>>>> career endpoints and components added
             <td>
               <button type="button" class="btn btn-success">
                 <a class="nav-link" [routerLink]="['/view/',student.studentId]">Student Details</a>
-              </button>              
+              </button>
             </td>
             <td>
               <button type="button" class="btn btn-warning">

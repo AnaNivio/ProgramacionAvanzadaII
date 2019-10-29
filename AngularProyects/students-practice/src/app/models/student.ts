@@ -7,9 +7,5 @@ export class Student {
     dni: string;
     email: string;
     address: string;
-<<<<<<< HEAD
     career: Career;
-=======
-    careerId: number;
->>>>>>> career endpoints and components added
 }

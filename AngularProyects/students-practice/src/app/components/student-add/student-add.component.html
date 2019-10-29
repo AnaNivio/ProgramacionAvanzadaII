@@ -1,56 +1,85 @@
 <h1>This is the Student Add Component</h1>
 
-    <div class="form-group">
+<form [formGroup] = "studentsForm" (ngSubmit) = "onSubmit()">
+     <div class="form-group">
         <label for="firstnameInput">First name</label>
-        <input [(ngModel)]= "firstName" type="text" class="form-control" id="firstnameInput" placeholder="First name">
+        <!-- <input [(ngModel)]= "firstName" type="text" class="form-control" id="firstnameInput" placeholder="First name"> -->
+        <input formControlName= "firstName" type="text" class="form-control" id="firstnameInput" placeholder="First name">
+      </div>
+
+      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+        <div *ngIf="firstName.errors.required">First Name is required</div>
+      </div>   
+
+    <div>
+        <label for="lastnameInput">Last name</label>
+        <!-- <input [(ngModel)]= "lastName" type="text" class="form-control" id="lastnameInput" placeholder="Last name"> -->
+        <input formControlName= "lastName" type="text" class="form-control" id="lastnameInput" placeholder="Last name">
     </div>    
 
-    <div class="form-group">
-        <label for="lastnameInput">Last name</label>
-        <input [(ngModel)]= "lastName" type="text" class="form-control" id="lastnameInput" placeholder="Last name">
-    </div>    
+    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+      <div *ngIf="lastName.errors.required">Last Name is required</div>
+    </div>  
 
     <div class="form-group">
         <label for="dniInput">Dni</label>
-        <input [(ngModel)]= "dni" type="text" class="form-control" id="dniInput" placeholder="Dni">
-    </div>    
+        <!-- <input [(ngModel)]= "dni" type="text" class="form-control" id="dniInput" placeholder="Dni"> -->
+        <input formControlName= "dni" type="text" class="form-control" id="dniInput" placeholder="Dni">
+    </div>   
+  
+    <div *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="alert alert-danger">
+      <div *ngIf="dni.errors.required">Dni is required</div>
+    </div> 
+    
 
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
-      <input [(ngModel)]= "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <!-- <input [(ngModel)]= "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
+      <input formControlName= "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
 
+    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+      <div *ngIf="email.errors.required">Email is required</div>
+    </div> 
+
     <div class="form-group">
-<<<<<<< HEAD
-        <label for="addressInput">Address</label>
-        <input [(ngModel)]= "address" type="text" class="form-control" id="addressInput" placeholder="Address">
-    </div>      
-=======
       <label for="addressInput">Address</label>
-      <input [(ngModel)]= "address" type="text" class="form-control" id="addressInput" placeholder="Address">
+      <!-- <input [(ngModel)]= "address" type="text" class="form-control" id="addressInput" placeholder="Address"> -->
+      <input formControlName= "address" type="text" class="form-control" id="addressInput" placeholder="Address">
     </div>    
+
+    <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+      <div *ngIf="address.errors.required">Address is required</div>
+    </div> 
     
     <div class="form-group">
       <label for="exampleFormControlSelect1">Choose a career</label>
-      <select class="form-control" id="exampleFormControlSelect1" *ngFor="let career of careerList">
-        <option [(ngModel)]= "careerId" value= "career.careerId">{{ career.name }}</option>
-      </select>
-      <option disabled selected class="text-dark">Carrers not found</option>
+        <select class="form-control" id="exampleFormControlSelect1" formControlName= "careerId">  
+            <!-- <option [(ngModel)]= "careerId" value= "career.careerId">{{ career.name }}</option> -->
+            <option disabled selected value=""> Careers... </option>                                    
+            <option [ngValue]="careerSelected.careerId" *ngFor="let careerSelected of careerList" >{{ careerSelected.name }}</option>
+        </select>
     </div>
->>>>>>> career endpoints and components added
+
+    <div *ngIf="careerId.invalid && (careerId.dirty || careerId.touched)" class="alert alert-danger">
+        <div *ngIf="careerId.errors.required">Career is required</div>
+    </div>
 
     <button type="button" (click)="addStudent()" class="btn btn-primary">
         <a class="nav-link">Add Student</a>
     </button>
  
-    <!-- para comprobar si se cargo -->
+
+
+      
+</form>
+     <!-- para comprobar si se cargo -->
     <!-- {{firstName}}
     {{lastName}}
     {{dni}}
     {{email}}
-    {{address}}
+    {{address}}-->
     
 
-    
- -->
+     
