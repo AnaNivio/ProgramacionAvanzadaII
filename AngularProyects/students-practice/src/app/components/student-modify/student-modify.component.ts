@@ -15,6 +15,8 @@ export class StudentModifyComponent implements OnInit {
   dni: string;
   email: string;
   address: string;
+  careerId: number;
+
 
   // normal server
   // constructor(private studentService: StudentServiceService) { }
@@ -31,6 +33,7 @@ export class StudentModifyComponent implements OnInit {
       student.dni = this.dni;
       student.email = this.email;
       student.address = this.address;
+      student.careerId = this.careerId;
       // normal server
       // this.studentService.addStudent(student);
 

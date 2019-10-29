@@ -7,7 +7,7 @@ import { Student } from './models/student';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'students-practice';  
+  title = 'students-practice';
 
 }
 

@@ -11,8 +11,12 @@ export class StudentAsyncService {
 
   constructor(private http: HttpClient) { }
 
+<<<<<<< HEAD
   // ready for test
     addStudent(Student: Student): Promise <any> {
+=======
+    addStudent(student: Student): Promise <any> {
+>>>>>>> career endpoints and components added
         const httpOptions = {
           headers : new HttpHeaders({
             'Content-Type': 'application/json'
@@ -21,9 +25,14 @@ export class StudentAsyncService {
         return this.http.post(this.apiUrl, Student, httpOptions).toPromise();
     }
 
+<<<<<<< HEAD
     // ready for test
     modifyStudent(Student: Student, id: number): Promise <any> {
       console.log(Student);
+=======
+    modifyStudent(student: Student, id: number): Promise <any> {
+      console.log(student);
+>>>>>>> career endpoints and components added
       const httpOptions = {
         headers : new HttpHeaders({
           'Content-Type': 'application/json'
@@ -44,6 +53,7 @@ export class StudentAsyncService {
 
    }
 
+   // ready to test
     deleteStudent(id: number): Promise <any> {
       return this.http.delete(this.apiUrl + id).toPromise();
 
