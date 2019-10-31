@@ -7,6 +7,8 @@ import { StudentListComponent } from './components/student-list/student-list.com
 import { StudentViewComponent } from './components/student-view/student-view.component';
 import { StudentModifyComponent } from './components/student-modify/student-modify.component';
 import { CareerListComponent } from './components/career-list/career-list.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
 
 const routes: Routes = [
   { path: 'add', component: StudentAddComponent},
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: 'listCareer', component: CareerListComponent},
   { path: 'view/:id', component: StudentViewComponent},
   { path: 'modification/:id', component: StudentModifyComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'signin', component: SignInComponent},
   { path: '', redirectTo: '/list', pathMatch: 'full'}
 ];
 

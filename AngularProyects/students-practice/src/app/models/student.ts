@@ -1,11 +1,14 @@
 import { Career } from './career';
 
 export class Student {
-    studentId: number;
-    lastName: string;
-    firstName: string;
-    dni: string;
-    email: string;
-    address: string;
-    career: Career;
+    constructor(
+        public career: Career = new Career(),
+        public studentId?: number,
+        public lastName?: string,
+        public firstName?: string,
+        public dni?: string,
+        public email?: string,
+        public address?: string
+    ) {}
+
 }

@@ -4,6 +4,7 @@ import { StudentServiceService } from 'src/app/services/student-service/student-
 import { StudentAsyncService } from 'src/app/services/student-asyncService/student-async.service';
 import { CareerAsyncService } from 'src/app/services/careers-asyncService/careers-async.service';
 import { Career } from 'src/app/models/career';
+import { NavListService } from 'src/app/services/nav-list-service/nav-list.service';
 
 @Component({
   selector: 'app-student-list',
@@ -14,6 +15,7 @@ export class StudentListComponent implements OnInit {
 
   studentsList = new Array<Student>();
   careersList = new Array<Career>();
+  visible: boolean;
 
   // normal service
   // constructor(private studentsService: StudentServiceService) { }
@@ -24,6 +26,7 @@ export class StudentListComponent implements OnInit {
 
   // logica siempre en ts no en html!!
   ngOnInit() {
+    this.visible = true;
     Promise.all([this.careerService.getCareers(), this.studentsService.getStudents()])
     .then((result) => {
       this.careersList = result[0];

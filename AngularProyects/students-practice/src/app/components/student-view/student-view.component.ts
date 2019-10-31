@@ -1,10 +1,11 @@
-import { Component, OnInit , EventEmitter} from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { StudentServiceService } from 'src/app/services/student-service/student-service.service';
 import { Student } from 'src/app/models/student';
 import { ActivatedRoute } from '@angular/router';
 import { StudentAsyncService } from 'src/app/services/student-asyncService/student-async.service';
 import { CareerAsyncService } from 'src/app/services/careers-asyncService/careers-async.service';
 import { Career } from 'src/app/models/career';
+import { NavListService } from 'src/app/services/nav-list-service/nav-list.service';
 
 @Component({
   selector: 'app-student-view',
@@ -28,15 +29,23 @@ export class StudentViewComponent implements OnInit {
 
   student = new Student();
 
-  constructor(private studentService: StudentAsyncService, private route: ActivatedRoute, private careersService: CareerAsyncService) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(
+    private studentService: StudentAsyncService,
+    private route: ActivatedRoute,
+    private careersService: CareerAsyncService
+  ) {}
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    Promise.all([this.careersService.getCareers(), this.studentService.getStudentById(id)])
-      .then((result) => {
+    Promise.all([
+      this.careersService.getCareers(),
+      this.studentService.getStudentById(id)
+    ])
+      .then(result => {
         this.careersList = result[0];
-
+        console.log(this.student);
         this.student.studentId = result[1].studentId;
         this.student.firstName = result[1].firstName;
         this.student.lastName = result[1].lastName;
@@ -53,11 +62,9 @@ export class StudentViewComponent implements OnInit {
             }
           });
         }
-
-      }).catch((err) => {
-          console.log(err);
+      })
+      .catch(err => {
+        console.log(err);
       });
-
-  }}
-
-
+  }
+}
