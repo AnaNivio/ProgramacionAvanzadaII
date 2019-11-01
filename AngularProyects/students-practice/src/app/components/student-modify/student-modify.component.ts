@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Career } from 'src/app/models/career';
 import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { CareerAsyncService } from 'src/app/services/careers-asyncService/careers-async.service';
-import { NavListService } from 'src/app/services/nav-list-service/nav-list.service';
 
 @Component({
   selector: 'app-student-modify',

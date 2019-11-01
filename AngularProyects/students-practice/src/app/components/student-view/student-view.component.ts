@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { StudentAsyncService } from 'src/app/services/student-asyncService/student-async.service';
 import { CareerAsyncService } from 'src/app/services/careers-asyncService/careers-async.service';
 import { Career } from 'src/app/models/career';
-import { NavListService } from 'src/app/services/nav-list-service/nav-list.service';
 
 @Component({
   selector: 'app-student-view',

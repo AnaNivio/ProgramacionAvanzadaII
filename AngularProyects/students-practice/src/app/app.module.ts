@@ -12,10 +12,8 @@ import { StudentViewComponent } from './components/student-view/student-view.com
 import { StudentModifyComponent } from './components/student-modify/student-modify.component';
 import { CareerListComponent } from './components/career-list/career-list.component';
 import { LoginComponent } from './components/login/login.component';
-import { NavListComponent } from './shared/nav-list/nav-list.component';
-import { NavListService } from './services/nav-list-service/nav-list.service';
-import { StudentServiceObservableComponent } from './services/student-service-observable/student-service-observable.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import { NavListComponent } from './shared/nav-list/nav-list.component';
 
 
 @NgModule({
@@ -27,9 +25,8 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
     StudentModifyComponent,
     CareerListComponent,
     LoginComponent,
-    NavListComponent,
-    StudentServiceObservableComponent,
-    SignInComponent
+    SignInComponent,
+    NavListComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +35,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [
-    NavListService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

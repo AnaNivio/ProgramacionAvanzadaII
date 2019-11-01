@@ -4,7 +4,6 @@ import { StudentServiceService } from 'src/app/services/student-service/student-
 import { StudentAsyncService } from 'src/app/services/student-asyncService/student-async.service';
 import { CareerAsyncService } from 'src/app/services/careers-asyncService/careers-async.service';
 import { Career } from 'src/app/models/career';
-import { NavListService } from 'src/app/services/nav-list-service/nav-list.service';
 
 @Component({
   selector: 'app-student-list',
@@ -22,7 +21,7 @@ export class StudentListComponent implements OnInit {
  // tslint:disable-next-line:no-trailing-whitespace
  
   // async service
-  constructor(private studentsService: StudentAsyncService, private careerService: CareerAsyncService) {   }
+  constructor(private studentsService: StudentServiceObservable, private careerService: CareerAsyncService) {   }
 
   // logica siempre en ts no en html!!
   ngOnInit() {
