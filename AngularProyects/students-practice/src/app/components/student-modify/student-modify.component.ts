@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Career } from 'src/app/models/career';
 import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { CareerAsyncService } from 'src/app/services/careers-asyncService/careers-async.service';
+import { StudentServiceObservable } from 'src/app/services/student-service-observable/student-service-observable.service';
+import { CareerServiceObservable } from 'src/app/services/career-service-observable/career-service-observable.service';
 
 @Component({
   selector: 'app-student-modify',
@@ -26,7 +28,7 @@ export class StudentModifyComponent implements OnInit {
   // constructor(private studentService: StudentServiceService) { }
 
   // tslint:disable-next-line: max-line-length
-  constructor(private studentService: StudentAsyncService, private careerService: CareerAsyncService, private formBuilder: FormBuilder, private route: ActivatedRoute) {
+  constructor(private studentService: StudentServiceObservable, private careerService: CareerServiceObservable, private formBuilder: FormBuilder, private route: ActivatedRoute) {
         this.studentsForm = this.formBuilder.group({
 
       // PONER LOS GETS DE CADA FORM CONTROL!!!
@@ -40,12 +42,11 @@ export class StudentModifyComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.careerService
-    .getCareers()
-    .then((result) => {
-      this.careerList = result;
-    }).catch((err) => {
-      console.log(err);
+    this.careerService.getCareers().subscribe(response => {
+      this.careerList = response as Career[];
+    },
+    error => {
+      console.log(error.message);
     });
   }
 
@@ -87,12 +88,11 @@ export class StudentModifyComponent implements OnInit {
 
       const request = Object.assign({}, this.studentsForm.value);
 
-      this.studentService
-       .modifyStudent(request, studentId)
-       .then((result) => {
-         console.log(result);
-       }).catch((err) => {
-         console.log(err);
+      this.studentService.modifyStudent(request, studentId).subscribe(response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error.message);
       });
   }
 

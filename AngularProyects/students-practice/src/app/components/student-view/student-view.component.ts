@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { StudentAsyncService } from 'src/app/services/student-asyncService/student-async.service';
 import { CareerAsyncService } from 'src/app/services/careers-asyncService/careers-async.service';
 import { Career } from 'src/app/models/career';
+import { StudentServiceObservable } from 'src/app/services/student-service-observable/student-service-observable.service';
+import { CareerServiceObservable } from 'src/app/services/career-service-observable/career-service-observable.service';
 
 @Component({
   selector: 'app-student-view',
@@ -30,40 +32,42 @@ export class StudentViewComponent implements OnInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(
-    private studentService: StudentAsyncService,
+    private studentService: StudentServiceObservable,
     private route: ActivatedRoute,
-    private careersService: CareerAsyncService
+    private careersService: CareerServiceObservable
   ) {}
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    Promise.all([
-      this.careersService.getCareers(),
-      this.studentService.getStudentById(id)
-    ])
-      .then(result => {
-        this.careersList = result[0];
-        console.log(this.student);
-        this.student.studentId = result[1].studentId;
-        this.student.firstName = result[1].firstName;
-        this.student.lastName = result[1].lastName;
-        this.student.address = result[1].address;
-        this.student.email = result[1].email;
-        this.student.dni = result[1].dni;
+    this.careersService.getCareers().subscribe(response => {
+      this.careersList = response as Career[];
+    },
+    error => {
+      console.log(error.message);
+    });
 
-        if (result[1].careerId === null) {
-          this.student.career = new Career(0, '---');
-        } else {
-          this.careersList.forEach(career => {
-            if (career.careerId === result[1].careerId) {
-              this.student.career = new Career(career.careerId, career.name);
-            }
-          });
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.studentService.getStudents().subscribe(response => {
+      this.student.studentId = response.studentId;
+      this.student.firstName = response.firstName;
+      this.student.lastName = response.lastName;
+      this.student.address = response.address;
+      this.student.email = response.email;
+      this.student.dni = response.dni;
+
+      if (response.careerId === null) {
+        this.student.career = new Career(0, '---');
+      } else {
+        this.careersList.forEach(career => {
+          if (career.careerId === response.careerId) {
+            this.student.career = new Career(career.careerId, career.name);
+          }
+        });
+      }
+    },
+    error => {
+      console.log(error.message);
+    });
   }
+
 }

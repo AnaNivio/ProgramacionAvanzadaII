@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from 'src/app/models/student';
-import { StudentServiceService } from 'src/app/services/student-service/student-service.service';
-import { StudentAsyncService } from 'src/app/services/student-asyncService/student-async.service';
-import { CareerAsyncService } from 'src/app/services/careers-asyncService/careers-async.service';
 import { Career } from 'src/app/models/career';
 import {
   FormGroup,
@@ -10,6 +7,8 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
+import { StudentServiceObservable } from 'src/app/services/student-service-observable/student-service-observable.service';
+import { CareerServiceObservable } from 'src/app/services/career-service-observable/career-service-observable.service';
 
 @Component({
   selector: 'app-student-add',
@@ -31,8 +30,8 @@ export class StudentAddComponent implements OnInit {
   // constructor(private studentService: StudentServiceService) { }
   // tslint:disable-next-line: max-line-length
   constructor(
-    private studentService: StudentAsyncService,
-    private careerService: CareerAsyncService,
+    private studentService: StudentServiceObservable,
+    private careerService: CareerServiceObservable,
     private formBuilder: FormBuilder
   ) {
     this.studentsForm = this.formBuilder.group({
@@ -50,14 +49,12 @@ export class StudentAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.careerService
-      .getCareers()
-      .then(result => {
-        this.careerList = result;
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.careerService.getCareers().subscribe(response => {
+      this.careerList = response as Career[];
+    },
+    error => {
+      console.log(error.message);
+    });
   }
 
   onSubmit() {}
@@ -98,13 +95,11 @@ export class StudentAddComponent implements OnInit {
 
     const request = Object.assign({}, this.studentsForm.value);
 
-    this.studentService
-      .addStudent(request)
-      .then(result => {
-        console.log(result);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.studentService.addStudent(request).subscribe(response => {
+      console.log(response);
+    },
+    error => {
+      console.log(error.message);
+    });
   }
 }

@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Student } from 'src/app/models/student';
-import { StudentServiceService } from 'src/app/services/student-service/student-service.service';
-import { StudentAsyncService } from 'src/app/services/student-asyncService/student-async.service';
-import { CareerAsyncService } from 'src/app/services/careers-asyncService/careers-async.service';
 import { Career } from 'src/app/models/career';
+import { StudentServiceObservable } from 'src/app/services/student-service-observable/student-service-observable.service';
+import { CareerServiceObservable } from 'src/app/services/career-service-observable/career-service-observable.service';
 
 @Component({
   selector: 'app-student-list',
@@ -14,58 +13,93 @@ export class StudentListComponent implements OnInit {
 
   studentsList = new Array<Student>();
   careersList = new Array<Career>();
-  visible: boolean;
 
   // normal service
   // constructor(private studentsService: StudentServiceService) { }
  // tslint:disable-next-line:no-trailing-whitespace
  
   // async service
-  constructor(private studentsService: StudentServiceObservable, private careerService: CareerAsyncService) {   }
+  constructor(private studentsService: StudentServiceObservable, private careerService: CareerServiceObservable) {   }
 
   // logica siempre en ts no en html!!
   ngOnInit() {
-    this.visible = true;
-    Promise.all([this.careerService.getCareers(), this.studentsService.getStudents()])
-    .then((result) => {
-      this.careersList = result[0];
-      const studentsJson = result[1];
+
+    this.careerService.getCareers().subscribe(response => {
+      this.careersList = response as Career[];
+    },
+    error => {
+      console.log(error.message);
+    });
+
+    this.studentsService.getStudents().subscribe(response => {
+      const studentsJson = response;
 
       studentsJson.forEach(element => {
-        let student = new Student();
-        student.studentId = element.studentId;
-        student.firstName = element.firstName;
-        student.lastName = element.lastName;
-        student.address = element.address;
-        student.email = element.email;
-        student.dni = element.dni;
+           const student = new Student();
+           student.studentId = element.studentId;
+           student.firstName = element.firstName;
+           student.lastName = element.lastName;
+           student.address = element.address;
+           student.email = element.email;
+           student.dni = element.dni;
 
-        if (element.careerId === null) {
-          student.career = new Career(0, '---');
-        } else {
-          this.careersList.forEach(career => {
-            if (career.careerId === element.careerId) {
-              student.career = new Career(career.careerId, career.name);
-            }
-          });
-        }
+           if (element.careerId === null) {
+             student.career = new Career(0, '---');
+           } else {
+            this.careersList.forEach(career => {
+               if (career.careerId === element.careerId) {
+                 student.career = new Career(career.careerId, career.name);
+               }
+             });
+           }
 
-        this.studentsList.push(student);
-
-      });
-
-    }).catch((err) => {
-        console.log(err);
+           this.studentsList.push(student);
+        });
+    },
+    error => {
+      console.log(error.message);
     });
+
+
+    // Promise.all([this.careerService.getCareers(), this.studentsService.getStudents()])
+    // .then((result) => {
+    //   this.careersList = result[0];
+    //   const studentsJson = result[1];
+
+    //   studentsJson.forEach(element => {
+    //     let student = new Student();
+    //     student.studentId = element.studentId;
+    //     student.firstName = element.firstName;
+    //     student.lastName = element.lastName;
+    //     student.address = element.address;
+    //     student.email = element.email;
+    //     student.dni = element.dni;
+
+    //     if (element.careerId === null) {
+    //       student.career = new Career(0, '---');
+    //     } else {
+    //       this.careersList.forEach(career => {
+    //         if (career.careerId === element.careerId) {
+    //           student.career = new Career(career.careerId, career.name);
+    //         }
+    //       });
+    //     }
+
+    //     this.studentsList.push(student);
+
+    //   });
+
+    // }).catch((err) => {
+    //     console.log(err);
+    // });
   }
 
   deleteStudent(id: number) {
-    this.studentsService
-    .deleteStudent(id)
-    .then((result) => {
-      console.log('Success!: ' + result);
-    }).catch((err) => {
-      console.log(err);
+    this.studentsService.deleteStudent(id).subscribe(response => {
+      console.log('Success!: ' + response);
+    },
+    error => {
+      console.log(error.message);
     });
   }
 

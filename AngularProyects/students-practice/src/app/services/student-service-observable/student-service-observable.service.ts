@@ -7,21 +7,22 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class StudentAsyncService {
-  private apiUrl = 'http://utn2019-avanzada2-tp8.herokuapp.com/api/students/';
+export class StudentServiceObservable {
+  private apiUrl = 'http://utn2019-avanzada2-tp8.herokuapp.com/api/students';
 
   constructor(private http: HttpClient) { }
 
-    addStudent(student: any): Promise <any> {
-        const httpOptions = {
+    addStudent(student: any): Observable <any> {
+      console.log(student);
+      const httpOptions = {
           headers : new HttpHeaders({
             'Content-Type': 'application/json'
           })
         };
-        return this.http.post(this.apiUrl, student, httpOptions).toPromise();
+      return this.http.post(this.apiUrl, student, httpOptions);
     }
 
-    modifyStudent(student: any, id: number): Promise <any> {
+    modifyStudent(student: any, id: number): Observable <any> {
       console.log(student);
       const httpOptions = {
         headers : new HttpHeaders({
@@ -29,7 +30,7 @@ export class StudentAsyncService {
         })
       };
 
-      return this.http.patch(this.apiUrl + id, student, httpOptions).toPromise();
+      return this.http.patch(this.apiUrl + id, student, httpOptions);
     }
 
   getStudents(): Observable<any> {
@@ -37,15 +38,15 @@ export class StudentAsyncService {
   }
 
 
-   getStudentById(id: number): Promise <any> {
+   getStudentById(id: number): Observable <any> {
 
-    return this.http.get(this.apiUrl + id).toPromise();
+    return this.http.get(this.apiUrl + id);
 
    }
 
    // ready to test
-    deleteStudent(id: number): Promise <any> {
-      return this.http.delete(this.apiUrl + id).toPromise();
+    deleteStudent(id: number): Observable <any> {
+      return this.http.delete(this.apiUrl + id);
 
    }
 
