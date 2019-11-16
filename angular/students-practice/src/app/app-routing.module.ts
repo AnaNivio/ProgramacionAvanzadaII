@@ -9,13 +9,14 @@ import { StudentModifyComponent } from './components/student-modify/student-modi
 import { CareerListComponent } from './components/career-list/career-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  { path: 'add', component: StudentAddComponent},
-  { path: 'list', component: StudentListComponent},
-  { path: 'listCareer', component: CareerListComponent},
-  { path: 'view/:id', component: StudentViewComponent},
-  { path: 'modification/:id', component: StudentModifyComponent},
+  { path: 'add', component: StudentAddComponent, canActivate: [AuthGuard]},
+  { path: 'list', component: StudentListComponent, canActivate: [AuthGuard]},
+  { path: 'listCareer', component: CareerListComponent, canActivate: [AuthGuard]},
+  { path: 'view/:id', component: StudentViewComponent, canActivate: [AuthGuard]},
+  { path: 'modification/:id', component: StudentModifyComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent},
   { path: 'signin', component: SignInComponent},
   { path: '', redirectTo: '/list', pathMatch: 'full'}

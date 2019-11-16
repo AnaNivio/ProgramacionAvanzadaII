@@ -5,6 +5,9 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
+import { UserAsyncService } from 'src/app/services/user-asyncService/user-async.service';
+import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +15,12 @@ import {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  studentsForm: FormGroup;
+  usersForm: FormGroup;
+  message: string;
 
-  constructor(private formBuilder: FormBuilder
+  constructor(private userService: UserAsyncService, private router:Router, private formBuilder: FormBuilder
     ) {
-    this.studentsForm = this.formBuilder.group({
+    this.usersForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
@@ -26,10 +30,35 @@ export class LoginComponent implements OnInit {
   }
 
   get email() {
-    return this.studentsForm.get('email');
+    return this.usersForm.get('email');
   }
   get password() {
-    return this.studentsForm.get('password');
+    return this.usersForm.get('password');
+  }
+
+
+  onSubmit()
+  {
+    let userCredentials = new User();
+    userCredentials.email = this.usersForm.get('email').value;
+    userCredentials.password = this.usersForm.get('password').value;
+
+    this.userService.login(userCredentials).subscribe(
+      response => {    
+        console.log(localStorage.getItem('token'))
+        localStorage.setItem('token',response.jwt)
+        this.router.navigate(['/list']);
+      },
+    error => {
+      if(error.status === 401){
+        this.message = 'Usuario no tiene permisos para realizar la accion';
+      }else if (error.status === 403) {
+        this.message = 'Usuario no puede entrar a este sitio';
+      }
+      else if (error.status === 404) {
+        this.message = 'Usuario y/o contrasenia invalida';
+      }
+    });
   }
 
 }
