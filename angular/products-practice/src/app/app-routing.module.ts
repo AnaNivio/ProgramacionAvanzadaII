@@ -4,8 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 //components
 import { LoginComponent } from './user/components/login/login.component';
-import { SignUpComponent } from './user/components/sign-up/sign-up.component';
 import { ListComponentComponent } from './product/components/list-component/list-component.component';
+import { SignUpComponent } from './user/components/sign-up/sign-up.component';
 
 
 const routes: Routes = [

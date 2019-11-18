@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserService } from './user.service';
+import { UserAsyncService } from './user-async.service';
 
-describe('UserService', () => {
+describe('UserAsyncService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: UserService = TestBed.get(UserService);
+    const service: UserAsyncService = TestBed.get(UserAsyncService);
     expect(service).toBeTruthy();
   });
 });

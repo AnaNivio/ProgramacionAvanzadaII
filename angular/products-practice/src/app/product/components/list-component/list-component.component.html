@@ -1,1 +1,23 @@
-<p>list-component works!</p>
+<h1>This is the Product List Component</h1>
+
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productsList">
+            <td>{{ product.productId }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+          </tr>
+        </tbody>
+      <!-- <tfoot class="grey lighten-5 w-100">
+          <ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems" [(page)]="page"
+          (pageChange)="loadPage($event)"></ngb-pagination>
+      </tfoot>  -->
+</table>
+  
