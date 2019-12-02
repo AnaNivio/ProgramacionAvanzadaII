@@ -20,12 +20,12 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserAsyncService, private router: Router, private formBuilder: FormBuilder
     ) {
     this.usersForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['',         {
+        validators: [Validators.required, Validators.email],
+        updateOn: 'blur'
+      }],
       password: ['', [Validators.required]]
     });
-  }
-
-  ngOnInit() {
   }
 
   get email() {
@@ -36,26 +36,32 @@ export class LoginComponent implements OnInit {
   }
 
 
-  onSubmit() {
-    let userCredentials = new User();
-    userCredentials.email = this.usersForm.get('email').value;
-    userCredentials.password = this.usersForm.get('password').value;
-
-    this.userService.login(userCredentials).subscribe(
-      response => {
-        console.log(localStorage.getItem('token'));
-        localStorage.setItem('token', response.jwt);
-        this.router.navigate(['/list']);
-      },
-    error => {
-      if (error.status === 401) {
-        this.message = 'Usuario no tiene permisos para realizar la accion';
-      } else if (error.status === 403) {
-        this.message = 'Usuario no puede entrar a este sitio';
-      } else if (error.status === 404) {
-        this.message = 'Usuario y/o contrasenia invalida';
-      }
-    });
+  ngOnInit() {
+    const token = this.userService.getToken;
+    // Check if there is a token in local storage
+    if (token !== null) {
+      // If there is a token don't let user enter login again, redirect to list
+      console.log('token in login component: ' + token);
+      this.router.navigateByUrl('/list');
+    }
   }
+
+  login() {
+    const request = Object.assign({}, this.usersForm.value);
+    console.log(request);
+
+    this.userService.login(request).subscribe(
+      result => {
+        console.log(result);
+        // set token
+        this.userService.setToken = result.jwt;
+        this.router.navigateByUrl('/list');
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
 
 }

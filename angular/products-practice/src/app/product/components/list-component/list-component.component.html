@@ -15,9 +15,8 @@
             <td>{{ product.description }}</td>
           </tr>
         </tbody>
-      <!-- <tfoot class="grey lighten-5 w-100">
-          <ngb-pagination *ngIf="showPagination" [collectionSize]="totalItems" [(page)]="page"
-          (pageChange)="loadPage($event)"></ngb-pagination>
-      </tfoot>  -->
+       <tfoot class="grey lighten-5 w-100">
+        <app-paginator [offset]="offset" [limit]="limit" [size]="count"></app-paginator>
+      </tfoot> 
 </table>
   

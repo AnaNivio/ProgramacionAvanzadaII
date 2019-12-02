@@ -1,41 +1,55 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
+import { Observable, Subject } from 'rxjs';
+import { User } from 'src/app/model/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAsyncService {
+  private apiURL = 'https://utn2019-avanzada2-tp9.herokuapp.com/';
+  private loginPath = 'login';
+  private registerPath = 'sign-up';
+  private identitiesPath = 'users/identities';
+
+  httpOptions: {};
   redirectUrl: string;
+  tokenValue = new Subject();
 
-  private apiUrl = 'http://utn2019-avanzada2-tp9.herokuapp.com';
-
-  constructor(private http: HttpClient) { }
-
-  login(user: any): Observable <any> {
-    const httpOptions = {
-      headers : new HttpHeaders({
+  constructor(private http: HttpClient) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-
-    return this.http.post(this.apiUrl + '/login', user, httpOptions);
   }
 
-  signUp(user: any): Observable <any> {
-    const httpOptions = {
-      headers : new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-
-    return this.http.post(this.apiUrl + '/sign-up', user, httpOptions);
+  set setToken(token) {
+    this.tokenValue.next(token); // this will make sure to tell every subscriber about the change.
+    localStorage.setItem('token', token);
   }
 
-  getIdentitiesByUser(email: any): Observable <any> {
-
-    return this.http.get(this.apiUrl + '/users/identities', email);
+  get getToken() {
+    return localStorage.getItem('token');
   }
 
+  login(user: User): Observable<any> {
+    return this.http
+      .post(this.apiURL + this.loginPath, user, this.httpOptions);
+  }
+
+  register(user: User): Observable<any> {
+    return this.http
+      .post(this.apiURL + this.registerPath, user, this.httpOptions);
+  }
+
+  validateEmail(email: string): Promise<any> {
+    return this.http
+      .get(this.apiURL + this.identitiesPath + '?email=' + email).toPromise();
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.tokenValue.next();
+  }
 }
