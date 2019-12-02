@@ -1,0 +1,20 @@
+<form action="" method="post" [formGroup]="loginForm" (ngSubmit)= "login()">
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" formControlName="email">
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors.required">Email is required</div>
+        <div *ngIf="email.errors.email">An email is required. Put a domain please</div>
+      </div> 
+  
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" formControlName="password">
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+        <div *ngIf="password.errors.required">Password is required</div>
+      </div> 
+
+      <button [disabled]="!loginForm.valid" type="submit">Login</button>
+
+    </div>
+
+</form>

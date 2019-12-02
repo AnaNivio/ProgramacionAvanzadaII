@@ -1,0 +1,35 @@
+<main class="py-5">
+    <section id="listado" class="mb-5">
+         <div class="container">
+              <h2 class="mb-4">Car List</h2>
+              <table class="table table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Brand <i class="fa fa-chevron-up"></i></th>
+                    <th scope="col">Model <i class="fa fa-chevron-up"></i></th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Domain</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- <tr>
+                      <th scope="row">3</th>
+                      <td>Volkswagen</td>
+                      <td>Trend</td>
+                      <td>2016</td>
+                      <td>CCC333</td>
+                    </tr> -->
+                    <tr *ngFor="let car of carsList">
+                        <td>{{ car.carId }}</td>
+                        <td>{{ car.brand }}</td>
+                        <td>{{ car.model }}</td>
+                        <td>{{ car.year }}</td>
+                        <td>{{ car.domain }}</td>
+                    </tr>
+
+                </tbody>
+              </table>
+         </div>
+    </section>
+</main>

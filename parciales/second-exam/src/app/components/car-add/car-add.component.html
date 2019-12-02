@@ -1,0 +1,51 @@
+<main class="py-5">
+  <section class="mb-5">         
+    <div class="container">
+        <h3 class="mb-3">Add Car</h3>
+        <div class="bg-light p-4">
+            <form action="" [formGroup]="carForm">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label for="">Brand</label>
+                        <input type="text" class="form-control form-control-ml" formControlName="brand">
+                        <div *ngIf="brand.invalid && (brand.dirty || brand.touched)" class="alert alert-danger">
+                            <div *ngIf="brand.errors.required">Brand is required</div>
+                        </div>   
+                    </div>  
+                </div>                      
+                <div class="row">    
+                    <div class="col-lg-4">
+                        <label for="">Model</label>
+                        <input type="text" class="form-control form-control-ml" formControlName="model">
+                        <div *ngIf="model.invalid && (model.dirty || model.touched)" class="alert alert-danger">
+                            <div *ngIf="model.errors.required">Model is required</div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">               
+                    <div class="col-lg-2">
+                        <label for="">Year</label>
+                        <input type="text" class="form-control form-control-ml" formControlName="year">
+                        <div *ngIf="year.invalid && (year.dirty || year.touched)" class="alert alert-danger">
+                            <div *ngIf="year.errors.required">Year is required</div>
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2">
+                        <label for="">Domain</label>
+                        <input type="text" class="form-control form-control-ml" formControlName="domain">
+                        <div *ngIf="domain.invalid && (domain.dirty || domain.touched)" class="alert alert-danger">
+                            <div *ngIf="domain.errors.required">Domain is required</div>
+                            <!-- <div *ngIf="domain.errors.asyncInvalid">Domain alredy exists</div> -->
+                        </div> 
+                    </div>            
+                </div>             
+                <hr class="mb-4">
+                <button type="submit" class="btn btn-primary" [disabled]="!carForm.valid">Add</button>      
+            </form>              
+        </div>
+    </div>         
+  </section>
+</main>
