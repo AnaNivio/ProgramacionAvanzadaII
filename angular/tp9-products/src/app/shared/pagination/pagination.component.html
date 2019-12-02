@@ -1,0 +1,48 @@
+<nav aria-label="Articles navigation">
+    <ul class="pagination pg-blue justify-content-center">
+      <li class="page-item" [ngClass]="{ disabled: activePage === 1 }">
+        <a class="page-link" (click)="selectPage(1)" mdbWavesEffect>Primero</a>
+      </li>
+      <li class="page-item" [ngClass]="{ disabled: activePage === 1 }">
+        <a class="page-link" (click)="selectPage(activePage - 1)" mdbWavesEffect
+          >Anterior</a
+        >
+        <!-- tabindex="-1" to diable prev-->
+      </li>
+      <li
+        class="page-item"
+        [ngClass]="{ active: activePage === pageNumber }"
+        ng
+        *ngFor="let pageNumber of totalPagesArray"
+      >
+        <a class="page-link" (click)="selectPage(pageNumber)" mdbWavesEffect>{{
+          pageNumber
+        }}</a>
+      </li>
+      <li class="page-item" [ngClass]="{ disabled: activePage === totalPages }">
+        <a class="page-link" (click)="selectPage(activePage + 1)" mdbWavesEffect
+          >Siguiente</a
+        >
+      </li>
+      <li class="page-item" [ngClass]="{ disabled: activePage === totalPages }">
+        <a class="page-link" (click)="selectPage(totalPages)" mdbWavesEffect
+          >Último</a
+        >
+      </li>
+      <li>
+        <select
+          class="browser-default custom-select"
+          (change)="setRows($event.target.value)"
+          style="background-color:rgba(255,255,255,0.3);;"
+        >
+          <option selected disabled>Filas</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+          <option value="50">50</option>
+        </select>
+      </li>
+    </ul>
+  </nav>
+  

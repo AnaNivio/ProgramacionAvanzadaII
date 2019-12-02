@@ -1,0 +1,51 @@
+<table mdbTable>
+    <thead class="black white-text">
+      <tr>
+        <th
+          *ngFor="let head of headElements"
+          (click)="sort(head.name)"
+          scope="col"
+        >
+          <button
+            *ngIf="sortedBy !== head.name"
+            fas
+            icon="sort"
+          ></button>
+          <button
+            *ngIf="sortedBy === head.name && sortOrder === 'ASC'"
+            fas
+            icon="sort-up"
+          ></button>
+          <button
+            *ngIf="sortedBy === head.name && sortOrder === 'DESC'"
+            fas
+            icon="sort-down"
+          ></button>
+          {{ head.translatedName }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        app-table-row
+        *ngFor="let product of products"
+        [product]="product"
+      ></tr>
+    </tbody>
+
+    <tfoot>
+        <div class="row">
+            <div class="col-md-12" style="padding-top: 1em">
+                <app-pagination
+                [totalPagesObservable]="totalItems.asObservable()"
+                (selectedPageEvent)="pageChange($event)"
+                (numberOfRowsEvent)="setRows($event)"
+                ></app-pagination>
+            </div>
+        </div>
+    </tfoot>
+
+  </table>
+
+
+  
