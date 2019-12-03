@@ -1,3 +1,5 @@
+<!-- correcion: Arreglo en los required para que el validator async pueda funcionar sin tener
+que esperar que los validators sincronicos esten en null (sacado) -->
 <main class="py-5">
   <section class="mb-5">         
     <div class="container">
@@ -9,7 +11,7 @@
                         <label for="">Brand</label>
                         <input type="text" class="form-control form-control-ml" formControlName="brand">
                         <div *ngIf="brand.invalid && (brand.dirty || brand.touched)" class="alert alert-danger">
-                            <div *ngIf="brand.errors.required">Brand is required</div>
+                            <div *ngIf="brand.hasError('required')">Brand is required</div>
                         </div>   
                     </div>  
                 </div>                      
@@ -18,7 +20,7 @@
                         <label for="">Model</label>
                         <input type="text" class="form-control form-control-ml" formControlName="model">
                         <div *ngIf="model.invalid && (model.dirty || model.touched)" class="alert alert-danger">
-                            <div *ngIf="model.errors.required">Model is required</div>
+                            <div *ngIf="model.hasError('required')">Model is required</div>
                         </div> 
                     </div>
                 </div>
@@ -27,7 +29,7 @@
                         <label for="">Year</label>
                         <input type="text" class="form-control form-control-ml" formControlName="year">
                         <div *ngIf="year.invalid && (year.dirty || year.touched)" class="alert alert-danger">
-                            <div *ngIf="year.errors.required">Year is required</div>
+                            <div *ngIf="year.hasError('required')">Year is required</div>
                         </div> 
                     </div>
                 </div>
@@ -37,13 +39,13 @@
                         <label for="">Domain</label>
                         <input type="text" class="form-control form-control-ml" formControlName="domain">
                         <div *ngIf="domain.invalid && (domain.dirty || domain.touched)" class="alert alert-danger">
-                            <div *ngIf="domain.errors.required">Domain is required</div>
-                            <!-- <div *ngIf="domain.errors.asyncInvalid">Domain alredy exists</div> -->
+                            <div *ngIf="domain.errors.asyncInvalid">Domain alredy exists</div> 
+                            <div *ngIf="domain.hasError('required')">Domain is required</div>
                         </div> 
                     </div>            
                 </div>             
                 <hr class="mb-4">
-                <button type="submit" class="btn btn-primary" [disabled]="!carForm.valid">Add</button>      
+                <button type="submit" (click)="addCars()" class="btn btn-primary" [disabled]="!carForm.valid">Add</button>      
             </form>              
         </div>
     </div>         

@@ -20,10 +20,12 @@ export class CarAddComponent implements OnInit {
       domain : [
         '',
         {
-          validators: [Validators.required, Validators.email],
+          validators: [Validators.required],
           asyncValidators: [this.validateDomain.bind(this)],
           updateOn: 'blur'
-        }      ]
+        }
+      ]
+      // correcion: me habia quedado un Validators.email. Dominio no tiene un email
     });
    }
 
@@ -50,19 +52,23 @@ export class CarAddComponent implements OnInit {
     const domain: string = this.carForm.get('domain').value;
 
     return new Promise((resolve, reject) => {
+
       this.carService
         .validateDomain(domain)
         .then(result => {
+          console.log('domain NOT found');
           resolve(null);
         })
         .catch(err => {
+          console.log('domain found');
+
           if (err.status === 409) {
             resolve({
               asyncInvalid: true // Name that is called for custom validator: formcontrolname.errors.asyncInvalid
             });
           }
+
           console.log(err);
-          reject('Error on getting domain');
         });
     });
   }
