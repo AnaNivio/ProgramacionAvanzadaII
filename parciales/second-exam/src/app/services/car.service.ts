@@ -21,8 +21,9 @@ export class CarService {
 
   validateDomain(domain: string): Promise<any> {
     return this.http
-      .get(this.apiUrl + 'cars/identities' + '?domain=' + domain).toPromise();
+      .get(this.apiUrl + '/identities' + '?domain=' + domain).toPromise();
   }
+  // correccion: habia puesto mal el url, por eso no me andaba el validator
 
   getCars(): Observable <any> {
     return this.http.get(this.apiUrl);
