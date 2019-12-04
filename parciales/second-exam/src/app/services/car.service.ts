@@ -29,6 +29,11 @@ export class CarService {
     return this.http.get(this.apiUrl);
  }
 
+ getCarsByColumn(orderBy: string, direction: string): Observable <any> {
+   console.log(this.apiUrl + '?direction=' + direction + '&orderBy=' + orderBy);
+  return this.http.get(this.apiUrl + '?direction=' + direction + '&orderBy=' + orderBy);
+}
+
 
 
 
