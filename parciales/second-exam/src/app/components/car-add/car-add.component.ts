@@ -11,6 +11,8 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarAddComponent implements OnInit {
   carForm: FormGroup;
+  alert: string;
+  success: string;
 
   constructor(private formBuilder: FormBuilder, private loginService: LoginService, private carService: CarService, private router: Router) {
     this.carForm = this.formBuilder.group({
@@ -77,6 +79,7 @@ export class CarAddComponent implements OnInit {
     const request = Object.assign({}, this.carForm.value);
 
     this.carService.addCar(request).subscribe(response => {
+      this.success = 'Car added successfuly!!';
       console.log(response);
     },
     error => {

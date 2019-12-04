@@ -46,7 +46,10 @@ que esperar que los validators sincronicos esten en null (sacado) -->
                 </div>             
                 <hr class="mb-4">
                 <button type="submit" (click)="addCars()" class="btn btn-primary" [disabled]="!carForm.valid">Add</button>      
-            </form>              
+            </form>
+            <div *ngIf="success != null" class="alert alert-success" role="alert">
+                {{success}}
+            </div>              
         </div>
     </div>         
   </section>

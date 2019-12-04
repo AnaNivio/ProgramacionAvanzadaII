@@ -10,6 +10,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  alert: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,11 +44,11 @@ export class LoginComponent implements OnInit {
       },
       err => {
         if (err.status === 401) {
-          console.log('Nombre de usuario o contrasenia erronea');
+          this.alert = 'Nombre de usuario o contrasenia erronea';
         } else if (err.status === 403) {
-          console.log('La pagina web no puede ser ingresada por el usuario. Forbidden');
+          this.alert = 'La pagina web no puede ser ingresada por el usuario. Forbidden';
         } else if (err.status === 404) {
-          console.log('El usuario que ingreso no existe. Intente de nuevo');
+          this.alert = 'El usuario que ingreso no existe. Intente de nuevo';
         }
       });
   }
