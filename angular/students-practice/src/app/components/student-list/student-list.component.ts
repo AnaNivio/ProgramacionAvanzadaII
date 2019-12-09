@@ -3,6 +3,7 @@ import { Student } from 'src/app/models/student';
 import { Career } from 'src/app/models/career';
 import { StudentServiceObservable } from 'src/app/services/student-service-observable/student-service-observable.service';
 import { CareerServiceObservable } from 'src/app/services/career-service-observable/career-service-observable.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-student-list',
@@ -24,15 +25,11 @@ export class StudentListComponent implements OnInit {
   // logica siempre en ts no en html!!
   ngOnInit() {
 
-    this.careerService.getCareers().subscribe(response => {
-      this.careersList = response as Career[];
-    },
-    error => {
-      console.log(error.message);
-    });
+    forkJoin([this.careerService.getCareers(), this.studentsService.getStudents()])
+    .subscribe((response) => {
+      this.careersList = response[0] as Career[];
 
-    this.studentsService.getStudents().subscribe(response => {
-      const studentsJson = response;
+      const studentsJson = response[1];
 
       studentsJson.forEach(element => {
            const student = new Student();
@@ -55,11 +52,7 @@ export class StudentListComponent implements OnInit {
 
            this.studentsList.push(student);
         });
-    },
-    error => {
-      console.log(error.message);
-    });
-
+  });
 
     // Promise.all([this.careerService.getCareers(), this.studentsService.getStudents()])
     // .then((result) => {
